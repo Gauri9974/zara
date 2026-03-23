@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zara Order Page</title>
+
+<style>
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    background: linear-gradient(to right, #141e30, #243b55);
+}
+
+/* Header */
+header {
+    text-align: center;
+    color: white;
+    padding: 20px;
+    font-size: 24px;
+    letter-spacing: 1px;
+}
+
+/* Container */
+.container {
+    max-width: 500px;
+    margin: 30px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Form Elements */
+label {
+    font-weight: 600;
+    margin-top: 10px;
+    display: block;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    transition: 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #007BFF;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0,123,255,0.5);
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(to right, #007BFF, #00c6ff);
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.03);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Total Price */
+.total-price {
+    text-align: right;
+    font-size: 18px;
+    font-weight: bold;
+    color: #007BFF;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    color: white;
+    margin-top: 20px;
+    font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    Zara Clothing Brand - Place Your Order
+</header>
+
+<div class="container">
+    <h2>Order Form</h2>
+
+    <form id="orderForm">
+
+        <label>Full Name</label>
+        <input type="text" placeholder="Enter your name" required>
+
+        <label>Email</label>
+        <input type="email" placeholder="Enter your email" required>
+
+        <label>Phone Number</label>
+        <input type="tel" placeholder="Enter phone number" required>
+
+        <label>Shipping Address</label>
+        <textarea rows="3" placeholder="Enter full address" required></textarea>
+
+        <label>Select Item</label>
+        <select id="item" required>
+            <option value="" disabled selected>Select product</option>
+            <option value="25">T-Shirt - $25</option>
+            <option value="40">Jeans - $40</option>
+            <option value="60">Jacket - $60</option>
+        </select>
+
+        <label>Quantity</label>
+        <input type="number" id="quantity" min="1" value="1">
+
+        <p class="total-price">Total: $<span id="total">0</span></p>
+
+        <button type="submit">Place Order</button>
+
+    </form>
+</div>
+
+<footer>
+    © 2024 Zara Clothing Brand
+</footer>
+
+<script>
+const item = document.getElementById("item");
+const quantity = document.getElementById("quantity");
+const total = document.getElementById("total");
+
+function calculateTotal() {
+    let price = item.value || 0;
+    let qty = quantity.value || 1;
+    total.innerText = (price * qty).toFixed(2);
+}
+
+item.addEventListener("change", calculateTotal);
+quantity.addEventListener("input", calculateTotal);
+
+document.getElementById("orderForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    alert("✅ Order placed successfully!");
+    this.reset();
+    total.innerText = "0";
+});
+</script>
+
+</body>
+</html>
